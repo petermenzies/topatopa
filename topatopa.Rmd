@@ -10,18 +10,38 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(janitor)
 library(here)
-
+library(lubridate)
 ```
 
 ## Data 
 
 ```{r}
-q1 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv")
+q1 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv", na = "-9999")
 
-q2 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca2-Bisley.csv")
+q2 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca2-Bisley.csv", na = "-9999")
 
-q3 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca3-Bisley.csv")
+q3 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca3-Bisley.csv", na = "-9999")
 
-mpr <- read_csv("../../../../courses/EDS214/topatopa/data/RioMameyesPuenteRoto.csv")
+mpr <- read_csv("../../../../courses/EDS214/topatopa/data/RioMameyesPuenteRoto.csv", na = "-9999")
+```
+
+## Wrangling
+
+```{r}
+q1_clean <- q1 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+
+q2_clean <- q2 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+
+q3_clean <- q3 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+
+mpr_clean <- mpr %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
 ```
 
