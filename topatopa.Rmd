@@ -16,13 +16,13 @@ library(lubridate)
 ## Data 
 
 ```{r}
-q1 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv", na = "-9999")
+q1 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv", na = c("-9999", ""))
 
-q2 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca2-Bisley.csv", na = "-9999")
+q2 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca2-Bisley.csv", na = c("-9999", ""))
 
-q3 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca3-Bisley.csv", na = "-9999")
+q3 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca3-Bisley.csv", na = c("-9999", ""))
 
-mpr <- read_csv("../../../../courses/EDS214/topatopa/data/RioMameyesPuenteRoto.csv", na = "-9999")
+mpr <- read_csv("../../../../courses/EDS214/topatopa/data/RioMameyesPuenteRoto.csv", na = c("-9999", ""))
 ```
 
 ## Wrangling
