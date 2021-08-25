@@ -34,7 +34,7 @@ q1_clean <- q1 %>%
 
 q2_clean <- q2 %>%
   janitor::clean_names() %>% 
-  mutate(sample_date = lubridate::mdy(sample_date)) 
+  mutate(sample_date = lubridate::mdy_hm(sample_date)) 
 
 q3_clean <- q3 %>%
   janitor::clean_names() %>% 
