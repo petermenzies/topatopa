@@ -45,3 +45,12 @@ mpr_clean <- mpr %>%
   mutate(sample_date = lubridate::mdy(sample_date)) 
 ```
 
+## Joining data frames
+
+```{r}
+combined_data <- q1_clean %>% 
+  full_join(q2_clean, key = sample_id) %>% 
+  full_join(q3_clean, key = sample_id) %>% 
+  full_join(mpr_clean)
+```
+
