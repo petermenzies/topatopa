@@ -101,14 +101,15 @@ gage_df <- combined_data %>%
   mutate(date = ymd(sample_date)) # made a new column called date which is class date
 
 # assigning object representing hurricane date
-hurricane_1 <- "1989-09-18"
-hurricane <- as.Date(hurricane_1)
+hurricane <- as.Date("1989-09-18")
 
 
 gage_plot <- ggplot(gage_df, aes(x = date, y = gage_ht)) +
-  geom_vline(xintercept = hurricane) + #line representing hurricane
+  geom_vline(xintercept = hurricane, linetype = "dashed") + #line representing hurricane
   geom_line(aes(color = sample_id)) +
-  labs(color = "Site") 
+  labs(color = "Site") +
+  labs(y = "Gage height (m)", x = element_blank()) +
+  theme_minimal()
   
 
 gage_plot
