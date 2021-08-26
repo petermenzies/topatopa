@@ -89,6 +89,7 @@ no3_plot
 ```
 
 
+
 ```{r}
 
 # Subset of data just for gage height and added a rectangle representing when the hurricane hit
@@ -99,23 +100,17 @@ gage_df <- combined_data %>%
   filter(year >= 1988 & year < 1995) %>% 
   mutate(date = ymd(sample_date)) # made a new column called date which is class date
 
-# assigning objects representing hurricane start and finish
-hurricane_start_1 <- "1989-09-18"
-hurricane_start <- as.Date(hurricane_start_1)
-hurricane_end_1 <- "1989-09-22"
-hurricane_end <- as.Date(hurricane_end_1)
+# assigning object representing hurricane date
+hurricane_1 <- "1989-09-18"
+hurricane <- as.Date(hurricane_start_1)
 
 
 gage_plot <- ggplot(gage_df, aes(x = date, y = gage_ht)) +
-  geom_rect(aes(xmin = hurricane_start,
-                xmax = hurricane_end,
-                ymin = 0,
-                ymax = 12), fill = "blue") +
+  geom_vline(xintercept = hurricane) + #line representing hurricane
   geom_line(aes(color = sample_id)) +
   labs(color = "Site") 
   
 
 gage_plot
-
 ```
 
