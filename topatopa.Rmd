@@ -49,8 +49,8 @@ mpr_clean <- mpr %>%
 
 ```{r}
 combined_data <- q1_clean %>% 
-  full_join(q2_clean, key = sample_id) %>% 
-  full_join(q3_clean, key = sample_id) %>% 
+  full_join(q2_clean) %>% 
+  full_join(q3_clean) %>% 
   full_join(mpr_clean)
 
 # could also use rbind()
