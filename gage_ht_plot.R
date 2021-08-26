@@ -15,7 +15,8 @@ gage_plot <- ggplot(gage_df, aes(x = date, y = gage_ht)) +
   geom_line(aes(color = sample_id)) +
   labs(color = "Site") +
   labs(y = "Gage height (m)", x = element_blank()) +
-  theme_minimal()
+  theme_minimal() +
+  theme(axis.text.x = element_blank())
 
 
 gage_plot
