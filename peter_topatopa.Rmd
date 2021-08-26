@@ -16,6 +16,8 @@ library(lubridate)
 ## Data 
 
 ```{r}
+## Turns out starting with the slash takes us to the root directory and we can go down the file path from there... getting the dot dots to work was cool too though.
+
 q1 <- read_csv("/courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv", na = c("-9999", ""))
 
 q2 <- read_csv("/courses/EDS214/topatopa/data/QuebradaCuenca2-Bisley.csv", na = c("-9999", ""))
