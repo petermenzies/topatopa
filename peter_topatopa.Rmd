@@ -58,3 +58,33 @@ combined_data <- q1_clean %>%
 # could also use rbind()
 ```
 
+
+## Visualizing SiO2 change over time
+
+```{r}
+sio2_all <- combined_data %>% 
+  select(sample_date, si_o2) %>% 
+  mutate(sample_date = year(sample_date)) %>% 
+  rename(year = sample_date) %>% 
+  group_by(year) %>% 
+  summarize(si_o2 = mean(si_o2, na.rm = TRUE))
+
+ggplot(sio2_all, aes(x = year, y = si_o2)) +
+  geom_line()
+  
+```
+
+## Grouped by site
+
+```{r}
+sio2_site <- combined_data %>% 
+  select(sample_date, si_o2, sample_id) %>% 
+  mutate(sample_date = year(sample_date)) %>% 
+  rename(year = sample_date) %>% 
+  group_by(year, sample_id) %>% 
+  summarize(si_o2 = mean(si_o2, na.rm = TRUE))
+
+ggplot(sio2_site, aes(x = year, y = si_o2)) +
+  geom_line(aes(color = sample_id))
+```
+
