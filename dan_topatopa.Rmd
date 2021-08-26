@@ -102,7 +102,7 @@ gage_df <- combined_data %>%
 
 # assigning object representing hurricane date
 hurricane_1 <- "1989-09-18"
-hurricane <- as.Date(hurricane_start_1)
+hurricane <- as.Date(hurricane_1)
 
 
 gage_plot <- ggplot(gage_df, aes(x = date, y = gage_ht)) +
