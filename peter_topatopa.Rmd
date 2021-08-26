@@ -85,6 +85,7 @@ sio2_site <- combined_data %>%
   summarize(si_o2 = mean(si_o2, na.rm = TRUE))
 
 ggplot(sio2_site, aes(x = year, y = si_o2)) +
-  geom_line(aes(color = sample_id))
+  geom_line(aes(color = sample_id), size = 1) +
+  labs(title = "SiO2 concentrations over time in four Luquillo Experimental \n Forest watershed study sites")
 ```
 
