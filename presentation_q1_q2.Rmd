@@ -20,17 +20,13 @@ Question: How did Hurricane Hugo affect other stream chemistry data in the LEF?
 ## Workflow
 
 ```{r}
-knitr::include_graphics("topatopa_workflow.png")
+knitr::include_graphics("figs/topatopa_workflow.png")
 ```
 
 # How did you set up your project (server, data, code, …)
 
 ```{r}
 
-<<<<<<< HEAD
-knitr::include_graphics("topatopa_workflow.png")
-=======
->>>>>>> 1b2de91321b2003aa2a826222fe6aaaa88dcb84d
-
+knitr::include_graphics("figs/project_setup.png")
 ```
 
