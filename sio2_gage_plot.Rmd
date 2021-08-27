@@ -5,5 +5,103 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(janitor)
+library(here)
+library(lubridate)
+library(patchwork)
+```
+
+## Data 
+
+```{r}
+q1 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv", na = c("-9999", ""))
+
+q2 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca2-Bisley.csv", na = c("-9999", ""))
+
+q3 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca3-Bisley.csv", na = c("-9999", ""))
+
+mpr <- read_csv("../../../../courses/EDS214/topatopa/data/RioMameyesPuenteRoto.csv", na = c("-9999", ""))
+```
+
+## Wrangling
+
+```{r}
+q1_clean <- q1 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+
+q2_clean <- q2 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy_hm(sample_date)) 
+
+q3_clean <- q3 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+
+mpr_clean <- mpr %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+```
+
+## Joining data frames
+
+```{r}
+combined_data <- q1_clean %>% 
+  full_join(q2_clean, key = sample_id) %>% 
+  full_join(q3_clean, key = sample_id) %>% 
+  full_join(mpr_clean)
+
+# could also use rbind()
+```
+
+
+
+
+```{r}
+# Subset of data just for gage height and added a rectangle representing when the hurricane hit
+
+gage_df <- combined_data %>% 
+  select(sample_id, sample_date, gage_ht) %>% 
+  mutate(year = year(sample_date)) %>% 
+  filter(year >= 1988 & year < 1995) %>% 
+  mutate(date = ymd(sample_date)) # made a new column called date which is class date
+
+# assigning object representing hurricane date
+hurricane <- as.Date("1989-09-18")
+
+
+gage_plot <- ggplot(gage_df, aes(x = date, y = gage_ht)) +
+  geom_vline(xintercept = hurricane, linetype = "dashed") + #line representing hurricane
+  geom_line(aes(color = sample_id)) +
+  labs(color = "Site") +
+  labs(title = "Gage height and SiO2 concentrations over time in four Luquillo Experimental \n Forest watershed study sites", y = "Gage height (m)", x = element_blank()) +
+  theme_minimal() +
+  theme(axis.text.x = element_blank())
+
+
+```
+
+```{r}
+sio2_site <- combined_data %>% 
+  select(sample_date, si_o2, sample_id) %>% 
+  mutate(sample_date = year(sample_date)) %>%
+  filter(sample_date >= 1988 & sample_date <= 1995) %>% 
+  mutate(sample_date = as.Date(ISOdate(sample_date, 1, 1))) %>% 
+  group_by(sample_date, sample_id) %>%
+  summarize(si_o2 = mean(si_o2, na.rm = TRUE))
+
+hurricane <- as.Date("1989-09-15")
+
+sio2_plot <- ggplot(sio2_site, aes(x = sample_date, y = si_o2)) +
+  geom_line(aes(color = sample_id), size = 1, show.legend = FALSE) +
+  geom_vline(xintercept = hurricane, linetype = "dashed") +
+  labs(x = "Date", y = "Silica (mg SiO2/L)")
+```
+
+```{r}
+sio2_gage_plot <- (gage_plot/sio2_plot) & theme_minimal()
+sio2_gage_plot
+ggsave(here("sio2_gage_plot.png"))
 ```
 
