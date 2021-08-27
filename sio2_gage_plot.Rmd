@@ -10,9 +10,10 @@ library(janitor)
 library(here)
 library(lubridate)
 library(patchwork)
+library(directlabels)
 ```
 
-## Data 
+## Data
 
 ```{r}
 q1 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv", na = c("-9999", ""))
@@ -55,9 +56,6 @@ combined_data <- q1_clean %>%
 # could also use rbind()
 ```
 
-
-
-
 ```{r}
 # Subset of data just for gage height and added a rectangle representing when the hurricane hit
 
@@ -73,12 +71,15 @@ hurricane <- as.Date("1989-09-18")
 
 gage_plot <- ggplot(gage_df, aes(x = date, y = gage_ht)) +
   geom_vline(xintercept = hurricane, linetype = "dashed") + #line representing hurricane
-  geom_line(aes(color = sample_id)) +
+  geom_line(aes(color = sample_id), show.legend = FALSE) +
   labs(color = "Site") +
-  labs(title = "Gage height and SiO2 concentrations over time in four Luquillo Experimental \n Forest watershed study sites", y = "Gage height (m)", x = element_blank()) +
+  labs(title = "Gage height and SiO2 concentrations over time in four \n Luquillo Experimental Forest watershed study sites", y = "Gage height (m)", x = element_blank()) +
+  geom_dl(aes(label = sample_id), method = list("last.points", hjust = 0, cex = 0.7)) + # used 
   theme_minimal() +
-  theme(axis.text.x = element_blank())
-
+  theme(axis.text.x = element_blank()) +
+  theme(plot.margin = unit(c(1,1,1,1), "cm"))
+  
+gage_plot
 
 ```
 
@@ -97,6 +98,9 @@ sio2_plot <- ggplot(sio2_site, aes(x = sample_date, y = si_o2)) +
   geom_line(aes(color = sample_id), size = 1, show.legend = FALSE) +
   geom_vline(xintercept = hurricane, linetype = "dashed") +
   labs(x = "Date", y = "Silica (mg SiO2/L)")
+
+sio2_plot
+
 ```
 
 ```{r}
@@ -104,4 +108,3 @@ sio2_gage_plot <- (gage_plot/sio2_plot) & theme_minimal()
 sio2_gage_plot
 ggsave(here("sio2_gage_plot.png"))
 ```
-
