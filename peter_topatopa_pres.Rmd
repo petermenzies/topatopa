@@ -27,7 +27,7 @@ class: left
 
 - ### As a group we decided which relationships to present on and create a final visualization with
 
-- ### Daniel created our final visualization, Halina documented our workflow and how we set up the project, and Peter created the rmarkdown presentation, and detailed our group roles
+- ### Daniel created our final visualization and described our challenges. Halina fine-tuned the final viz appearance and documented our workflow and how we set up the project. Peter detailed group roles and documented our results.
 
 
 ---
