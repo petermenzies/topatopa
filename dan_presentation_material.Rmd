@@ -69,7 +69,7 @@ mpr <- read_csv("/courses/EDS214/topatopa/data/RioMameyesPuenteRoto.csv", na = c
 you can see all of our work on [github](https://github.com/petermenzies/topatopa)
 
 ```{r echo=FALSE}
-knitr::include_graphics("sio2_gage_plot.png")
+knitr::include_graphics("figs/sio2_gage_plot.png")
 ```
 
 
