@@ -13,9 +13,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Goal/ Question
 
-Goal: 
+Goal: To investigate the impact of Hurricane Hugo on stream chemistry data in The Luquillo Experimental Forest (LEF).
+
+Question: How did Hurricane Hugo affect other stream chemistry data in the LEF?
 
 ## Workflow
 
+```{r}
+knitr::include_graphics("topatopa_workflow.png")
+```
 
 # How did you set up your project (server, data, code, …)
+
+```{r}
+
+
+```
+
