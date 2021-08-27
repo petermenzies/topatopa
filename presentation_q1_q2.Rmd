@@ -1,0 +1,33 @@
+---
+title: "Presentation Questions 1 & 2"
+author: "Daniel K., Halina D., Peter M."
+date: "8/27/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Goal/Question + workflow you used to achieve it
+
+## Goal/ Question
+
+Goal: To investigate the impact of Hurricane Hugo on stream chemistry data in The Luquillo Experimental Forest (LEF).
+
+Question: How did Hurricane Hugo affect other stream chemistry data in the LEF?
+
+## Workflow
+
+```{r}
+knitr::include_graphics("topatopa_workflow.png")
+```
+
+# How did you set up your project (server, data, code, …)
+
+```{r}
+
+knitr::include_graphics("topatopa_workflow.png")
+
+```
+
