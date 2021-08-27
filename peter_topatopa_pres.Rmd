@@ -17,7 +17,7 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 
-class: inverse, left
+class: left
 
 # Team Organization
 
@@ -31,7 +31,7 @@ class: inverse, left
 
 
 ---
-class: inverse, left
+class: left
 
 # Results
 
@@ -42,7 +42,7 @@ knitr::include_graphics("figs/sio2_plot.png")
 ```
 
 ---
-class: inverse, left
+class: left
 
 # Results
 
@@ -54,14 +54,20 @@ knitr::include_graphics("figs/gage_plot.png")
 
 ---
 
-class: inverse, left
+class: left
 
 # Results
 
 ### We combined the two plots into a final visualization comparing gage height and SiO<sup>2</sup> conc. over time at the four LEF sites
 
+---
+
+class: left
+
+# Results: final visualization
+
 ```{r, echo = FALSE}
-knitr::include_graphics("")
+knitr::include_graphics("figs/sio2_gage_plot.png")
 ```
 
 
