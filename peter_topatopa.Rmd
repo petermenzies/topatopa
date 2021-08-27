@@ -86,10 +86,14 @@ sio2_site <- combined_data %>%
 
 hurricane <- as.Date("1989-09-15")
 
-ggplot(sio2_site, aes(x = sample_date, y = si_o2)) +
-  geom_line(aes(color = sample_id), size = 1) +
-  labs(title = "SiO2 concentrations over time in four Luquillo Experimental \n Forest watershed study sites") +
-  geom_vline(xintercept = hurricane, linetype = "dashed")
+sio2_plot <- ggplot(sio2_site, aes(x = sample_date, y = si_o2)) +
+    geom_line(aes(color = sample_id), size = 1) +
+    labs(title = expression(paste("Mean yearly SiO"^"2", "concentrations")), x = "Year", y = expression(paste("SiO"^"2", "(mg/L"^"-1", ")")), color = "Site") +
+    geom_vline(xintercept = hurricane, linetype = "dashed")
+
+sio2_plot
+
+ggsave("sio2_plot.png", plot = sio2_plot, path = here("figs"), width = 4, height = 2)
 ```
 
 ## Date conundrum option 2:
