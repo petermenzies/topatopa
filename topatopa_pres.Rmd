@@ -31,6 +31,10 @@ class: center, middle
 ### /ʃaː.'riŋ.ɡan/
 
 ---
+
+test slide
+
+---
 class: inverse, center, middle
 
 # Get Started
