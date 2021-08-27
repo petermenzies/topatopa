@@ -1,0 +1,135 @@
+---
+title: "Test - Halina Branch"
+author: "Daniel K., Halina D., Peter M."
+date: "8/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(janitor)
+library(here)
+library(lubridate)
+library(patchwork)
+```
+
+### Data 
+```{r}
+q1 <- read_csv("/courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv", na = c("-9999", ""))
+
+q2 <- read_csv("/courses/EDS214/topatopa/data/QuebradaCuenca2-Bisley.csv", na = c("-9999", ""))
+
+q3 <- read_csv("/courses/EDS214/topatopa/data/QuebradaCuenca3-Bisley.csv", na = c("-9999", ""))
+
+mpr <- read_csv("/courses/EDS214/topatopa/data/RioMameyesPuenteRoto.csv", na = c("-9999", ""))
+```
+
+### Wrangling
+
+```{r}
+q1_clean <- q1 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+
+q2_clean <- q2 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy_hm(sample_date)) 
+
+q3_clean <- q3 %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+
+mpr_clean <- mpr %>%
+  janitor::clean_names() %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) 
+```
+
+### Joined Data 
+
+```{r}
+combined_data <- q1_clean %>% 
+  full_join(q2_clean) %>% 
+  full_join(q3_clean) %>% 
+  full_join(mpr_clean)
+
+```
+
+### Dan's Graphs
+
+
+```{r}
+k_df <- combined_data %>% 
+  select(sample_id, sample_date, k) %>% 
+  mutate(year = year(sample_date)) %>% 
+  filter(year >= 1988 & year < 1995)
+
+no3_df <- combined_data %>% 
+  select(sample_id, sample_date, no3) %>% 
+  mutate(year = year(sample_date)) %>% 
+  filter(year >= 1988 & year < 1995)
+
+k_plot <- ggplot(k_df, aes(x = sample_date, y = k)) +
+  geom_line(aes(color = sample_id)) +
+  theme(axis.title.x = element_blank()) +
+  labs(color = "Site", x = element_blank())
+
+k_plot
+
+no3_plot <- ggplot(no3_df, aes(x = sample_date, y = no3)) +
+  geom_line(aes(color = sample_id), show.legend = FALSE) +
+  scale_y_continuous(limits = c(0, 500)) +
+  labs(x = "Date")
+
+no3_plot
+
+```
+
+
+```{r}
+(k_plot/no3_plot) & theme_minimal()
+```
+
+
+### Halina's Graphs
+
+```{r}
+
+k_df <- combined_data %>% 
+  select(sample_id, sample_date, k) %>% 
+  mutate(year = year(sample_date)) %>% 
+  filter(year >= 1988 & year < 2012) 
+
+no3_df <- combined_data %>% 
+  select(sample_id, sample_date, no3) %>% 
+  mutate(year = year(sample_date))
+
+k_no3 <- combined_data %>% 
+  select(sample_id, sample_date, k, no3) %>% 
+  mutate(no3 = (no3/1000))
+
+
+k_plot <- ggplot(data = k_df, aes(x = year, y = k)) +
+  geom_line(aes(color = sample_id)) +
+  facet_wrap(~sample_id)
+
+
+k_plot
+
+k_no3_plot
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
