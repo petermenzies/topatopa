@@ -19,7 +19,7 @@ options(htmltools.dir.version = FALSE)
 ---
 # Challenges
 
-- Getting data into our project from the data file
+- Reading in our data
 
 ```{r eval=FALSE, tidy=FALSE}
 q1 <- read_csv("../../../../courses/EDS214/topatopa/data/QuebradaCuenca1-Bisley.csv", na = c("-9999", ""))
