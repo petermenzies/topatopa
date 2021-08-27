@@ -27,7 +27,10 @@ knitr::include_graphics("topatopa_workflow.png")
 
 ```{r}
 
+<<<<<<< HEAD
 knitr::include_graphics("topatopa_workflow.png")
+=======
+>>>>>>> 1b2de91321b2003aa2a826222fe6aaaa88dcb84d
 
 ```
 
