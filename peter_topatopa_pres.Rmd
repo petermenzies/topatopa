@@ -49,28 +49,21 @@ class: inverse, left
 ### We also plotted gage height at all sites as a time series surrounding Hugo and found an inverse relationship with SiO<sup>2</sup>
 
 ```{r, echo = FALSE}
-knitr::include_graphics("figs/sio2_plot.png")
+knitr::include_graphics("figs/gage_plot.png")
 ```
 
 ---
 
-You are recommended to use the [RStudio IDE](https://www.rstudio.com/products/rstudio/), but you do not have to.
+class: inverse, left
 
-- Create a new R Markdown document from the menu `File -> New File -> R Markdown -> From Template -> Ninja Presentation`;<sup>1</sup>
+# Results
 
---
+### We combined the two plots into a final visualization comparing gage height and SiO<sup>2</sup> conc. over time at the four LEF sites
 
-- Click the `Knit` button to compile it;
+```{r, echo = FALSE}
+knitr::include_graphics("")
+```
 
---
-
-- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)<sup>2</sup> "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
-
-.footnote[
-[1] 中文用户请看[这份教程](https://slides.yihui.org/xaringan/zh-CN.html)
-
-[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
-]
 
 ---
 background-image: url(`r xaringan:::karl`)
