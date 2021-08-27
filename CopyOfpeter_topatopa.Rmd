@@ -74,37 +74,16 @@ ggplot(sio2_all, aes(x = year, y = si_o2)) +
   
 ```
 
-## Date conundrum option 1:
+## Grouped by site
 
 ```{r}
 sio2_site <- combined_data %>% 
   select(sample_date, si_o2, sample_id) %>% 
-  mutate(sample_date = year(sample_date)) %>%
-  mutate(sample_date = as.Date(ISOdate(sample_date, 1, 1))) %>% 
-  group_by(sample_date, sample_id) %>%
-  summarize(si_o2 = mean(si_o2, na.rm = TRUE))
-
-hurricane <- as.Date("1989-09-15")
-
-sio2_plot <- ggplot(sio2_site, aes(x = sample_date, y = si_o2)) +
-    geom_line(aes(color = sample_id), size = 0.75) +
-    labs(title = expression(paste("Mean yearly SiO"^"2", " conc. in four LEF sites")), x = "Year", y = expression(paste("SiO"^"2", "(mg/L"^"-1", ")")), color = "Site") +
-    geom_vline(xintercept = hurricane, linetype = "dashed")
-
-sio2_plot
-
-ggsave("sio2_plot.png", plot = sio2_plot, path = here("figs"), width = 4, height = 2)
-```
-
-## Date conundrum option 2:
-
-```{r}
-sio2_site <- combined_data %>% 
-  select(sample_date, si_o2, sample_id) %>% 
-  mutate(sample_date = year(sample_date)) %>%
-  mutate(sample_date = as.Date(as.character(sample_date), format = "%Y")) %>% 
-  group_by(sample_date, sample_id) %>%
-  summarize(si_o2 = mean(si_o2, na.rm = TRUE))
+  mutate(sample_date = year(sample_date)) %>% 
+  mutate(sample_date = as.Date(sample_date)) %>% 
+  group_by(sample_date, sample_id) %>% 
+  summarize(si_o2 = mean(si_o2, na.rm = TRUE)) 
+  
 
 hurricane <- as.Date("1989-09-15")
 
@@ -112,30 +91,5 @@ ggplot(sio2_site, aes(x = sample_date, y = si_o2)) +
   geom_line(aes(color = sample_id), size = 1) +
   labs(title = "SiO2 concentrations over time in four Luquillo Experimental \n Forest watershed study sites") +
   geom_vline(xintercept = hurricane, linetype = "dashed")
-```
-
-
-## Dan's Plot
-
-```{r}
-# Subset of data just for gage height and added a rectangle representing when the hurricane hit
-
-gage_df <- combined_data %>% 
-  select(sample_id, sample_date, gage_ht) %>% 
-  mutate(year = year(sample_date)) %>% 
-  filter(year >= 1988 & year < 1995) %>% 
-  mutate(date = ymd(sample_date)) # made a new column called date which is class date
-
-# assigning object representing hurricane date
-hurricane <- as.Date("1989-09-18")
-
-
-gage_plot <- ggplot(gage_df, aes(x = date, y = gage_ht)) +
-  geom_vline(xintercept = hurricane, linetype = "dashed") + #line representing hurricane
-  geom_line(aes(color = sample_id)) +
-  labs(color = "Site", title = "Watershed gage height in four LEF sites") +
-  labs(y = "Gage height (m)", x = "Year")
-
-ggsave("gage_plot.png", plot = gage_plot, path = "figs", width = 4, height = 2)
 ```
 
